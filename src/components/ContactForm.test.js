@@ -35,7 +35,18 @@ userEvent.click(submitBtn);
 });
 
 test('renders ONE error message if user enters a valid first name and last name but no email.', async () => {
-    
+    render(<ContactForm/>);
+    const firstNameField = screen.getByLabelText(/first name*/i);
+    const lastNameField = screen.getByLabelText(/last name */i);
+    // console.log(firstNameField);
+    // console.log(lastNameField);
+    userEvent.type(firstNameField, 'James');
+    userEvent.type(lastNameField, 'Jones');
+    const submitBtn = screen.getByText(/submit/i);
+    userEvent.click(submitBtn);
+    const errorMessages2 = await screen.findAllByTestId('error');
+    expect(errorMessages2).toHaveLength(1)
+
 });
 
 test('renders "email must be a valid email address" if an invalid email is entered', async () => {
