@@ -2,15 +2,18 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import {render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
 import ContactForm from './ContactForm';
 
 test('renders without errors', ()=>{
-    
+    render(<ContactForm/>);
 });
 
 test('renders the contact form header', ()=> {
-    
+    render(<ContactForm/>);
+    const formHeader = screen.queryByText(/contact form/i)
+    expect(formHeader).toBeInTheDocument();
+    expect(formHeader).toBeTruthy();
+    expect(formHeader).toHaveTextContent(/contact form/i)
 });
 
 test('renders ONE error message if user enters less then 5 characters into firstname.', async () => {
